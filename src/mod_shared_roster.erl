@@ -669,9 +669,14 @@ add_user_to_group(Host, {LUser, LServer} = US, Group) ->
 		    true -> [{all_users, true}];
 		    false -> []
 		end,
+		OnlineUsersOpt =
+		case LUser == "@online@" of
+			true -> [{online_users, true}];
+			false -> []
+		end,
             mod_shared_roster:set_group_opts(
 	      Host, Group,
-	      GroupOpts ++ AllUsersOpt);
+	      GroupOpts ++ AllUsersOpt ++ OnlineUsersOpt);
 	nomatch ->
 	    %% Push this new user to members of groups where this group is displayed
 	    push_user_to_displayed(LUser, LServer, Group, both),
