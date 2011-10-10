@@ -149,7 +149,8 @@ get_user_roster(Items, US) ->
 		    fun({User, Server} = UserServer, Acc2) ->
 			    if UserServer == US -> Acc2;
 			       true ->
-				    UserServerB = {list_to_binary(User), list_to_binary(Server)},
+				    %%UserServerB = {list_to_binary(User), list_to_binary(Server)},
+				    UserServerB = {User, Server},
 				    dict:append(UserServerB,
 						   GroupName,
 						   Acc2)
